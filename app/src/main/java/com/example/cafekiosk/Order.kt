@@ -1,5 +1,7 @@
 package com.example.cafekiosk
 
+import kotlin.system.exitProcess
+
 data class MenuItem(
     var id: Int,
     var name: String,
@@ -21,7 +23,6 @@ class Order {
 
     fun firstOrder() {
 
-
         while (true) {
             try {
                 println(
@@ -29,9 +30,8 @@ class Order {
                             "1. 주문하기\n" +
                             "2. 프로그램 종료."
                 )
-                val orderNum = readLine()?.toInt()
 
-                when (orderNum) {
+                when (readLine()?.toInt()) {
                     1 -> {
                         UseCafe().useMethodChoice()
                         break
@@ -66,9 +66,8 @@ class UseCafe() {
             )
 
             try {
-                val useMethod = readLine()?.toInt()
 
-                when (useMethod) {
+                when (readLine()?.toInt()) {
                     1 -> {
                         method = "매장식사"
                         MainMenu().mainMenuList()
@@ -83,7 +82,7 @@ class UseCafe() {
 
                     3 -> {
                         println("프로그램 종료")
-                        System.exit(0)
+                        exitProcess(0)
                     }
 
                     else -> println("올바르지 않은 번호입니다. 다시 입력해주세요. \n----------------------------------\n")
@@ -113,9 +112,8 @@ class MainMenu() {
             )
 
             try {
-                val menu = readLine()?.toInt()
 
-                when (menu) {
+                when (readLine()?.toInt()) {
                     1 -> {
                         val list = listOf(
                             MenuItem(1, "에스프레소", 3000), MenuItem(2, "아메리카노(Hot)", 3000),
@@ -125,6 +123,17 @@ class MainMenu() {
                         )
                         for ((a, b, c) in list) {
                             println("$a. $b $c")
+                        }
+                        try {
+                            while (true) {
+                                val num = readLine()?.toInt()
+                                detailMenu = list[num?.minus(1)!!].name //코드 수정해보기
+                                totalCharge = list[num - 1].charge //코드 수정해보기
+                                break
+                            }
+
+                        } catch (e: java.lang.NumberFormatException) {
+                            println("메뉴 주문은 숫자만 입력할 수 있습니다. \n----------------------------------\n")
                         }
                         DetailMenu().numClick()
                         break
@@ -139,6 +148,17 @@ class MainMenu() {
                         for ((a, b, c) in list) {
                             println("$a. $b $c")
                         }
+                        try {
+                            while (true) {
+                                val num = readLine()?.toInt()
+                                detailMenu = list[num?.minus(1)!!].name //코드 수정해보기
+                                totalCharge = list[num - 1].charge //코드 수정해보기
+                                break
+                            }
+
+                        } catch (e: java.lang.NumberFormatException) {
+                            println("메뉴 주문은 숫자만 입력할 수 있습니다. \n----------------------------------\n")
+                        }
                         DetailMenu().numClick()
                         break
                     }
@@ -151,6 +171,17 @@ class MainMenu() {
                         for ((a, b, c) in list) {
                             println("$a. $b $c")
                         }
+                        try {
+                            while (true) {
+                                val num = readLine()?.toInt()
+                                detailMenu = list[num?.minus(1)!!].name //코드 수정해보기
+                                totalCharge = list[num - 1].charge //코드 수정해보기
+                                break
+                            }
+
+                        } catch (e: java.lang.NumberFormatException) {
+                            println("메뉴 주문은 숫자만 입력할 수 있습니다. \n----------------------------------\n")
+                        }
                         DetailMenu().numClick()
                         break
                     }
@@ -162,6 +193,17 @@ class MainMenu() {
                         )
                         for ((a, b, c) in list) {
                             println("$a. $b $c")
+                        }
+                        try {
+                            while (true) {
+                                val num = readLine()?.toInt()
+                                detailMenu = list[num?.minus(1)!!].name //코드 수정해보기
+                                totalCharge = list[num - 1].charge //코드 수정해보기
+                                break
+                            }
+
+                        } catch (e: java.lang.NumberFormatException) {
+                            println("메뉴 주문은 숫자만 입력할 수 있습니다. \n----------------------------------\n")
                         }
                         DetailMenu().numClick()
                         break
@@ -176,6 +218,17 @@ class MainMenu() {
                         for ((a, b, c) in list) {
                             println("$a. $b $c")
                         }
+                        try {
+                            while (true) {
+                                val num = readLine()?.toInt()
+                                detailMenu = list[num?.minus(1)!!].name //코드 수정해보기
+                                totalCharge = list[num - 1].charge //코드 수정해보기
+                                break
+                            }
+
+                        } catch (e: java.lang.NumberFormatException) {
+                            println("메뉴 주문은 숫자만 입력할 수 있습니다. \n----------------------------------\n")
+                        }
                         DetailMenu().numClick()
                         break
                     }
@@ -189,12 +242,19 @@ class MainMenu() {
                         for ((a, b, c) in list) {
                             println("$a. $b $c")
                         }
-                        var num = readLine()!!.toInt() // 일단 이렇게 처리 수정 예정
-//                        if (num == list.component1()){
-//                            println("ddd")
-//                            totalCharge
-//                            detailMenu="test"
-//                        }
+
+                        try {
+                            while (true) {
+                                val num = readLine()?.toInt()
+                                detailMenu = list[num?.minus(1)!!].name //코드 수정해보기
+                                totalCharge = list[num - 1].charge //코드 수정해보기
+                                break
+                            }
+
+                        } catch (e: java.lang.NumberFormatException) {
+                            println("메뉴 주문은 숫자만 입력할 수 있습니다. \n----------------------------------\n")
+                        }
+
                         DetailMenu().numClick()
                         break
                     }
@@ -213,12 +273,11 @@ class MainMenu() {
 class DetailMenu() {
     fun numClick() {
         println(
-            "주문 내역 입니다.\n" +
+            "----------------------------------\n" +
+                    "주문 내역 입니다.\n" +
                     "${method}\n" +
                     "${detailMenu}\n" +
                     "${totalCharge}"
         )
-
     }
-
 }
